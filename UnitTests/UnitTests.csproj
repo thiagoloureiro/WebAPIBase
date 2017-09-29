@@ -68,7 +68,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\API\WebAPI.csproj">
+    <ProjectReference Include="..\WebAPI\WebAPI.csproj">
       <Project>{9ceb7e7d-3c7e-4e50-9961-9e51630ec630}</Project>
       <Name>WebAPI</Name>
     </ProjectReference>
