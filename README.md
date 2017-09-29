@@ -1,7 +1,7 @@
 # WebAPIBase
 WebAPI (.NET) Base Project with JWT Auth, Dapper (ORM), SQL Server DB, Crypto, Swagger
 
-Instalation / Configuration Steps:
+## Instalation / Configuration Steps:
 
 1) Clone the repository
 git clone https://github.com/thiagoloureiro/WebAPIBase.git
@@ -10,12 +10,14 @@ git clone https://github.com/thiagoloureiro/WebAPIBase.git
 
 4) Create a Database (any desired name) in SQL Server, you can use an existing one.
 
-3) Modify Web.Config file in WebAPI Project, connectionstring:
-    <add name="SqlServerConnString" providerName="System.Data.SqlClient" connectionString="Data Source=localhost;Initial Catalog=DBModel;User Id=user; Password=passwd;MultipleActiveResultSets=True" />
+3) Modify **Web.Config** file in **WebAPI Project**, connectionstring:
+   ```
+   <add name="SqlServerConnString" providerName="System.Data.SqlClient" connectionString="Data Source=localhost;Initial Catalog=DBModel;User Id=user; Password=passwd;MultipleActiveResultSets=True" />
+   ```
 Modify using your values.
 
 4) Run the User table Script (Located in DB Project)
-
+```
 CREATE TABLE [dbo].[User] (
     [Id]             INT            IDENTITY (1, 1) NOT NULL,
     [Name]           VARCHAR (50)   NULL,
@@ -29,24 +31,25 @@ CREATE TABLE [dbo].[User] (
     [Password]       VARCHAR (50)   NOT NULL,
     CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+```
 
 5) Run the Project.
 
 6) After run the project, in the address bar you will have something like: http://localhost:52915/ (the port may change) add swagger to address, for ex: http://localhost:52915/swagger, a Swagger page should be displayed.
 
-7) You will notice 2 endpoints, api/user and api/user/create, the first one is to login and the second one to create a new user to generate the token for the JWT Authentication.
+7) You will notice 2 endpoints, **api/user** and **api/user/create**, the first one is to login and the second one to create a new user to generate the token for the JWT Authentication.
 
-8) Access the /api/user/create endpoind and create a new user, you should receive a result "User Created Successfully! :)"
+8) Access the **/api/user/create** endpoind and create a new user, you should receive a result "User Created Successfully! :)"
 
-9) Test Login with the Created User in the /api/user endpoint, with the following request
-
+9) Test Login with the Created User in the **/api/user** endpoint, with the following request
+```
 {
   "username": "UserNameHere",
   "password": "PasswordHere"
 }
-
+```
 10) You Should receive a ReponseBody like this:
-
+```
 {
   "Id": 2,
   "Name": null,
@@ -60,11 +63,12 @@ CREATE TABLE [dbo].[User] (
   "Password": null,
   "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InRlIiwibmJmIjoxNTA2NzE4ODk0LCJleHAiOjE1MDY3MjAwOTQsImlhdCI6MTUwNjcxODg5NH0.L5LEVLclhj8MSx4stFO44HYRkkdVwb3Pk_ILejRtqVA"
 }
+```
 
 11) Now you are all set, just create the other Controllers following the patterns and rock on :)
-Remember to dot use the [AllowAnonymous]  from the other Controllers you are going to create, because with this property will ignore and you can access the API Without Authentication.
+Remember to dot use the **[AllowAnonymous]**  from the other Controllers you are going to create, because with this property will ignore and you can access the API Without Authentication.
 
-12) To use Authentication for example using Postman, in the HEADER add a Key called "Authorization" (without quotes) and Value add: Bearer "the received token from the login" (Without Quotes)
+12) To use Authentication for example using Postman, in the HEADER add a Key called "Authorization" **(without quotes)** and Value add: Bearer "the received token from the login" **(without quotes)**
 
 13) Any Questions please feel free to ask ! :)
 
