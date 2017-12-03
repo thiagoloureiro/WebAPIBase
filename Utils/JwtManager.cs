@@ -1,22 +1,24 @@
-﻿using System;
+﻿using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime.Caching;
 using System.Security.Claims;
-using Microsoft.IdentityModel.Tokens;
+using System.Security.Cryptography;
 
 namespace Utils
 {
     public static class JwtManager
     {
-        /// <summary>
-        /// Use the below code to generate symmetric Secret Key
-        ///     var hmac = new HMACSHA256();
-        ///     var key = Convert.ToBase64String(hmac.Key);
-        /// </summary>
-        private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
+        private static MemoryCache cache;
 
         public static string GenerateToken(string username, int expireMinutes = 20)
         {
-            var symmetricKey = Convert.FromBase64String(Secret);
+            cache = new MemoryCache("CachingProvider");
+
+            var hmac = new HMACSHA256();
+            var key = Convert.ToBase64String(hmac.Key);
+
+            var symmetricKey = Convert.FromBase64String(key);
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var now = DateTime.UtcNow;
@@ -35,11 +37,15 @@ namespace Utils
             var stoken = tokenHandler.CreateToken(tokenDescriptor);
             var token = tokenHandler.WriteToken(stoken);
 
+            cache.Add(token, key, DateTimeOffset.MaxValue);
+
             return token;
         }
 
         public static ClaimsPrincipal GetPrincipal(string token)
         {
+            var key = cache[token].ToString();
+
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -48,7 +54,7 @@ namespace Utils
                 if (jwtToken == null)
                     return null;
 
-                var symmetricKey = Convert.FromBase64String(Secret);
+                var symmetricKey = Convert.FromBase64String(key);
 
                 var validationParameters = new TokenValidationParameters()
                 {
