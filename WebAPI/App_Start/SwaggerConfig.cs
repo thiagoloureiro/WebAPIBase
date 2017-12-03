@@ -33,7 +33,7 @@ namespace WebAPI
                         // hold additional metadata for an API. Version and title are required but you can also provide
                         // additional fields by chaining methods off SingleApiVersion.
                         //
-                        c.SingleApiVersion("v1", "WebAPI");
+                        c.SingleApiVersion("v1", "WebAPI Sample by Thiago Loureiro");
 
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
@@ -102,7 +102,8 @@ namespace WebAPI
                         // those comments into the generated docs and UI. You can enable this by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        c.IncludeXmlComments(string.Format(@"{0}\bin\WebAPI.XML",
+                            System.AppDomain.CurrentDomain.BaseDirectory));
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.

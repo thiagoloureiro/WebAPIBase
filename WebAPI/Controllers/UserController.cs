@@ -18,6 +18,11 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// Generate new Token / User Validate
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("")]
@@ -32,6 +37,13 @@ namespace WebAPI.Controllers
             return Json(ret);
         }
 
+        /// <summary>
+        /// Insert new user
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="confirmpassword"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("create")]
