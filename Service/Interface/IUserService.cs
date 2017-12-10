@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Model;
+﻿using Model;
+using System.Collections.Generic;
 
 namespace Service.Interface
 {
@@ -10,5 +10,7 @@ namespace Service.Interface
         User GetToken(string username, string password);
 
         void InsertUser(string username, string password);
+
+        bool ClearFullCache();
     }
 }

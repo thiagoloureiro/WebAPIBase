@@ -18,6 +18,20 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("userlist")]
+        [SwaggerResponse(HttpStatusCode.OK, type: typeof(string), description: "Retorna Lista de usuários")]
+        public IHttpActionResult GetusetList()
+        {
+            var ret = _userService.GetUserList();
+
+            if (ret == null)
+                throw new HttpResponseException(HttpStatusCode.Unauthorized);
+
+            return Json(ret);
+        }
+
         /// <summary>
         /// Generate new Token / User Validate
         /// </summary>
@@ -56,6 +70,19 @@ namespace WebAPI.Controllers
                 return Json("User Created Successfully! :)");
             }
             throw new HttpResponseException(HttpStatusCode.ExpectationFailed);
+        }
+
+        /// <summary>
+        /// Clear User Cache
+        /// </summary>
+        [AllowAnonymous]
+        [HttpPut]
+        [Route("clearcache")]
+        [SwaggerResponse(HttpStatusCode.OK, type: typeof(string), description: "Limpa o Cache")]
+        public IHttpActionResult ClearCache()
+        {
+            _userService.ClearFullCache();
+            return Ok();
         }
     }
 }

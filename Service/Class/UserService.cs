@@ -2,6 +2,7 @@
 using Model;
 using Service.Interface;
 using System.Collections.Generic;
+using Service.Cache;
 
 namespace Service.Class
 {
@@ -14,6 +15,7 @@ namespace Service.Class
             _userRepository = userRepository;
         }
 
+        [CacheableResult]
         public List<User> GetUserList()
         {
             var obj = new List<User>();
@@ -38,6 +40,12 @@ namespace Service.Class
             var passwordCrypt = Utils.RijndaelManagedEncryption.EncryptRijndael(password);
 
             _userRepository.InsertUser(username, passwordCrypt);
+        }
+
+        [ClearFullCache("Service.Class.UserService")]
+        public bool ClearFullCache()
+        {
+            return true;
         }
     }
 }
