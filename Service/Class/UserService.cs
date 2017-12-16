@@ -2,7 +2,7 @@
 using Model;
 using Service.Interface;
 using System.Collections.Generic;
-using Service.Cache;
+using TestaCache.Cache;
 
 namespace Service.Class
 {
@@ -15,7 +15,7 @@ namespace Service.Class
             _userRepository = userRepository;
         }
 
-        [CacheableResult]
+        [CacheableResult(600)]
         public List<User> GetUserList()
         {
             var obj = new List<User>();
