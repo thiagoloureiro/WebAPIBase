@@ -3,6 +3,7 @@ using Swashbuckle.Swagger.Annotations;
 using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebAPI.Filters;
 using WebAPI.Requests;
 
 namespace WebAPI.Controllers
@@ -18,7 +19,7 @@ namespace WebAPI.Controllers
             _userService = userService;
         }
 
-        [AllowAnonymous]
+        [JwtAuthentication]
         [HttpGet]
         [Route("userlist")]
         [SwaggerResponse(HttpStatusCode.OK, type: typeof(string), description: "Retorna Lista de usuários")]

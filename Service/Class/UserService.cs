@@ -2,7 +2,6 @@
 using Model;
 using Service.Interface;
 using System.Collections.Generic;
-using TestaCache.Cache;
 
 namespace Service.Class
 {
@@ -15,7 +14,6 @@ namespace Service.Class
             _userRepository = userRepository;
         }
 
-        [CacheableResult(600)]
         public List<User> GetUserList()
         {
             var obj = new List<User>();
@@ -42,7 +40,6 @@ namespace Service.Class
             _userRepository.InsertUser(username, passwordCrypt);
         }
 
-        [ClearFullCache("Service.Class.UserService")]
         public bool ClearFullCache()
         {
             return true;
