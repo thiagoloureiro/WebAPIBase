@@ -75,4 +75,3 @@ Remember to dot use the **[AllowAnonymous]**  from the other Controllers you are
 13) Any Questions please feel free to ask ! :)
 
 Enjoy!
-
