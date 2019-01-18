@@ -3,6 +3,8 @@ WebAPI (.NET) Base Project with JWT Auth, Dapper (ORM), SQL Server DB, Crypto, S
 
 [![Build Status](https://img.shields.io/appveyor/ci/thiagoloureiro/webapibase/master.svg)](https://ci.appveyor.com/project/thiagoloureiro/webapibase) 
 
+[![Build history](https://buildstats.info/appveyor/chart/thiagoloureiro/webapibase)](https://ci.appveyor.com/project/thiagoloureiro/webapibase/history)
+
 ## Instalation / Configuration Steps:
 
 1) Clone the repository
